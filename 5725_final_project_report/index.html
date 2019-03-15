@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Starter Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet"> -->
+
+    <!-- Custom styles for this template -->
+    <link href="starter-template.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!-- <script src="../../assets/js/ie-emulation-modes-warning.js"></script> -->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#intro">Introduction</a></li>
+            <li><a href="#obj">Project Objective</a></li>
+            <li><a href="#design">Design and Testing</a></li>
+            <li><a href="#con">Conclusion</a></li>
+            <li><a href="#fut">Future Work</a></li>
+            <li><a href="#code">Code appendix</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <!--<div class="starter-template"> -->
+
+      <div class="starter-template">
+      
+        <h1> R<img class="img-rounded" src="pics/magic_ball.PNG" alt="Generic placeholder image" width="50" height="50">lling  Ball </h1>
+        <p> </p>
+        
+        <p class="lead">ECE 5725 Final Project Report<br>By Qinya Zeng, Yunting Li.</p>
+
+      </div>
+
+      <hr>
+      <div class="center-block">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/1oXLSoYBc7E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <hr id="intro">
+          <h4 style="text-align:center;">Demonstration Video</h4>
+      </div>
+
+      
+
+      <div style="text-align:center;">
+        <h2>Introduction</h2>
+        <hr id="obj">
+        <p style="text-align: left;padding: 0px 30px;font-size: 120%">In this project, we create a game using Raspberry Pi. We use an absolute orientation sensor to develop the game and turn the sensor data from accelerometer and gyroscope into real time 3-dimensional orientation, so that user could control the game by body motion, a new way to interact with computer, instead of with traditional keyboard and mouse. In this design, we use pygame for game developing, and use piTFT as display interface of the game. In this game, users are going to move the ball from start point, which locates on one end of a randomly chosen map, to the end point, which locates on the other end. Game have different modes, with different level of difficulty and different time limits. For entertainment value, a background music will change according to the state of game. </p>
+	
+    </div>
+     <div style="text-align:center;">
+       <h2>Project Objective</h2>
+       <hr id='design'>
+       <p style="text-align: left;padding: 0px 30px;font-size: 120%">Design a game that could using body motion to control. Have background music. With randomly chosen maps. Have a timer and limited times to conquer maps. When ball fall from map, game would restart using the same map or user would fail the game according to the different mode user choose. When ball reach end point, user would succeed the game or continue the game by immediately randomly choosing another map due to the mode user in. </p>
+     </div>
+
+    
+
+     
+
+    
+
+      <div style="text-align:center;">
+        <h2>Design and Testing</h2>
+</div>
+<div style="text-align:center;">
+    <h2>Hardware</h2>
+    <p style="text-align: left;padding: 0px 30px;font-size: 120%">The main challenge for hardware design is to connect, retrieve and adjust data from the orientation sensor. In order to avoid complicated I2C interface problem (for example, BNO055's use of I2C clock stretching will cause problems with a hardware I2C clock stretching bug in the R-Pi), we connect BNO055 using its serial UART mode according to the suggestion by Adafruit, manufacturer of BNO055. Then we need to disable the kernel's use of the Pi's serial port, because when the Pi kernel boots up, it will put a login terminal on the serial port, if we connect BNO055 to this serial port, it will get confused by the login terminal. Thus, we disable the kernel's use of the serial port by using the raspi-config tool, same operation as in Lab1. Then we reboot to enable the changes. Wires are connected as the figure below. </p>
+    <img class="img-thumbnail" src="pics/fig1.PNG" alt="Generic placeholder image" width="240" height="120"> <img class="img-thumbnail" src="pics/Sensor.JPG" alt="Generic placeholder image" width="240" height="120S">
+    <p class="text-center">Fig.1 wiring sensor and R-Pi (by Adafruit) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Fig.2 circuits of wiring sensor </p>
+    <p style="text-align: left;padding: 0px 30px;font-size: 120%">We connect BNO055 Vin to R-Pi 3.3V power, BNO055 GND to R-Pi GND, BNO055 SDA to R-Pi RXD, BNO055 SCL to R-Pi TXD, BNO055 PS1 to BNO055 Vin. Then we need to find a GPIO pin on R-pi to connect to RST on the sensor. We choose GPIO18 because it is a general pin which doesn’t have other functions reserved by R-Pi thus would easier for us when using. </p>
+</div>
+<div style="text-align:center;">
+    <h2>Software</h2>
+    <p class="text-justify" style="text-align: left;padding: 0px 30px;font-size: 120%"> In software design part, we introduce how we use serial UART to connect the absolute orientation sensor and how we design the Rolling Ball game through python pygame based on Raspberry Pi. We firstly get the absolute orientation from sensor BNO055. Based on the absolute orientation from sensor, we design 3 combinations between map and ball. The first is 1D rotating map with rolling ball, the second is 2D map with rolling ball, and the last one is 3D rotating map. The 2D map with rolling ball is our main application shown in the demo video. To increase the fun of the game, we design different modes in 2D map with rolling ball. In each mode, we add time limit to increase the excitement of the game. At last, we design the interface and music of the game to increase user experience. The main flow of 2D map with rolling ball is shown in fig 3.</p>
+    <img class="img-rounded" src="pics/Flow.PNG" alt="Generic placeholder image" width="700" height="700">
+    <p class="text-center"> Fig.3 Flow chart of 2D map with rolling ball </p>
+        
+        <p class="text-justify" style="text-align: left;padding: 0px 30px;font-size: 120%">The implementation details of each part are introduced as follows. </p>
+        <h3 class="text-left">1. Get Position from Sensor </h3>
+        <p style="text-align: left;padding: 0px 30px;font-size: 120%"> In order to collect 3D orientation data from sensor, we need to have R-Pi configuration with serial UART and RST connected to a GPIO pin. Then we read three Euler angles (in degree) from sensor including heading, roll and pitch. The parameters we need are roll and pitch. we do not need heading because we cannot move a ball on a plan due to different heading of our map. So, we got all parameters needed for 3-dimensional control from the sensor. There are a few things need to pay attention to: the angle we retrieve from sensor is in degree, we need to convert it into radians using the formula: radian =π/180 degree, and our gamepad is designed to attach under the R-Pi and display reversely, so the pitch angle need to adjust since we initially have pitch=180 degree.. </p>
+        </p>
+<h3 class="text-left">2. Map &amp; Ball Drawing</h3>
+<h4 class="text-left"> 2.1 1D Rotating Map with Rolling Ball </h4>
+<p style="text-align: left;padding: 0px 30px;font-size: 120%"> In 1D rotating map, the map is composed of lines and we use roll angle from BNO055 sensor to control the rotating attitude of the lines. The ball would scroll against the line based on the tilt angle. If the ball scrolls out of the line, it would fall down to the next line below the previous line. The example pictures are shown in fig 4.</p>
+<p style="text-align: left;padding: 0px 30px;font-size: 120%"> To implement the 1D rotating map, we first draw the map, composed of lines, on the piTFT screen. The length of each line is fixed and the line rotates according to its center. If we want to specify a line, we need to confirm the start and end points of the line. The equation of start and end positions based on tilt angle are shown as follow</p>
+<p> <img src="http://latex.codecogs.com/svg.latex? (x_s, y_s) = ( x_c-\frac{l}{2}\times cos(\theta) , y_c - \frac{l}{2}\times sin(\theta) )" border="0"/> </p>
+<p><img src="http://latex.codecogs.com/svg.latex? (x_s, y_s) = ( x_c+\frac{l}{2}\times cos(\theta) , y_c + \frac{l}{2}\times sin(\theta) )" border="0"/> </p>
+<p style="text-align: left;padding: 0px 30px;font-size: 120%">where (xs, ys) is the start point, (xe, ye)is the end point, (xc, yc)is the center point of the line, l is the length of the line, is the roll angle in radians. </p>
+<p style="text-align: left;padding: 0px 30px;font-size: 120%">Then we add the ball, loaded from a colorful ball image. The speed of the ball could be adjusted by the tilt angle. In order to make the ball seems to scroll against the line based on the tilt angle, we split the movements of the ball into two part, the x direction and y direction. The x direction is designed to track the tilt angle of the plane. If the tilt angle of the plane is positive, the ball rolls to +x direction. If the tilt angle of the plane is negative, the ball rolls to -x direction. The bias of the tilt angle based on the reference determines the speed of the ball in x direction. The y direction is designed to stick ball and line together. We continuously detect the y position of the ball named Ball_y and y position of the line based on the x position of the ball named Line_y. The distance between line and ball (i.e., Ball_y - Line_y) is asserted to be within the radius of the ball. If the distance is bigger than the radius of the ball, we move the ball downwards to stick to the line. If the distance is smaller than 0, we move the ball upwards to stick to the line. Beside, if the ball scrolls outside the x range of the line, we let it fall down to the next line. </p>
+<img class="img-rounded" src="pics/Line1.JPG" alt="Generic placeholder image" width="240" height="150"> <img class="img-rounded" src="pics/Line4.JPG" alt="Generic placeholder image" width="240" height="150"> <img class="img-rounded" src="pics/Line5.JPG" alt="Generic placeholder image" width="240" height="150">
+<p class="text-center"> Fig.4 An example of 1D rotating map with rolling ball </p>
+<h4 class="text-left">2.2 2D Map with Rolling Ball </h4>
+<p style="text-align: left;padding: 0px 30px;font-size: 120%">In 2D Map with rolling ball, the map is stationary and the ball would scroll on the map. The direction of the ball is controlled by roll and pitch angle from sensor, where roll angle controls the x-axis direction and pitch angle controls the y-axis direction. The bias of the angle from 0 controls the speed of the ball. We designed the map with small white squares, where 16 squares * 12 squares is chosen in our implementation. There are two red squares on the map, where one is considered as start position and the other is considered as end position. The background of the game is black. Each time the game is started, the ball would be set in the start red squares. The user could use BNO055 sensor to control the ball scroll on the map. If the ball is out of the map, the ball would disappear and a “Game Over” interface would be shown on the screen. If the user control the ball to reach the end red square, the user conquered the map successfully. Considering the difficulty of maps, we created map sets with three levels of difficulty. They are easy maps, median maps and hard maps. Fig.5 is an example of easy map, fig.6 is an example of median map and fig.7 is an example of hard map. </p>
+<img class="img-rounded" src="pics/Simple_map.JPG" alt="Generic placeholder image" width="240" height="150"> <img class="img-rounded" src="pics/Medium_map.JPG" alt="Generic placeholder image" width="240" height="150"> <img class="img-rounded" src="pics/Hard_map.JPG" alt="Generic placeholder image" width="240" height="150">
+<p class="text-center"> Fig.5 Simple map &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Fig.6 medium map &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Fig.7 hard map</p>
+<h4 class="text-left">2.3 3D Rotating Map</h4>
+<p style="text-align: left;padding: 0px 30px;font-size: 120%">In 3D rolling map, the map is composed of a plane and we use roll and pitch angle from BNO055 sensor to control the rotating attitude of the lines. Since the piTFT screen is 2D, we need to show a 3D rotation on a 2D screen. According to the perspective principle, the object far away from us is small and the object near us is big. Thus, the map is shown based on two directions of rotation, while roll angle represents the x direction and pitch angle represents the y direction. When the roll angle is positive, the right line of map diminishes and the left line enlarges. When the roll angle is negative, the right line of map enlarges and the left line enlarges. When the pitch angle is positive, the upper line of map diminishes and the low line enlarges. When the pitch angle is negative, the upper line of map enlarges and the low line diminishes. The example pictures are shown in fig.8.</p>
+<img class="img-rounded" src="pics/3D_map_1.JPG" alt="Generic placeholder image" width="240" height="150"> <img class="img-rounded" src="pics/3D_map_2.JPG" alt="Generic placeholder image" width="240" height="150"> <img class="img-rounded" src="pics/3D_map_3.JPG" alt="Generic placeholder image" width="240" height="150">
+<p class="text-center"> Fig.8 An example of 3D rotating map</p>
+<h3 class="text-left">3. Modes &amp; Time</h3>
+<p style="text-align: left;padding: 0px 30px;font-size: 120%">We design two modes for the game 2D Map with Rolling Ball. Mode one is Single Map and mode two is Unlimited Map. We add limit time into both modes. </p>
+<p p style="text-align: left;padding: 0px 30px;font-size: 120%">In Single Map Mode, user could choose the difficulty level of map (i.e., easy map, median map or difficult map). For example, if user decided to play median map, the system would randomly choose a map in the median map set for the user. If user controls the ball to reach the end point, the user successfully conquered the map and the time he/she used would be shown on the screen. If the user controls the ball to scroll out of the map, the ball would be reseted to the start red square. If user runs out of time, he/she fails the game. The time limit for sigal and median map is 60s, while the time limit for hard map is 90s. </p>
+<p style="text-align: left;padding: 0px 30px;font-size: 120%">In Unlimited Map Mode, user could play as much maps as he/she can. Each time user controls the ball to reach the end point of a map, a new map would appear and the ball would be reseted to the start point. In the first two maps, the system would randomly choose maps from easy map set. In the next two maps, the system would randomly choose maps from median map set. After the user conquered four maps, the system would randomly choose maps from hard map set for the following maps. Similarly as Single Map Mode, there is a time limit for each map. The time limit for sigal and median map is 60s, while the time limit for hard map is 90s. </p>
+<h3 class="text-left">4. Interface Design</h3>
+<p style="text-align: left;padding: 0px 30px;font-size: 120%">We designed several interfaces to complete the game, add visual appreciation, and increase user experience. At the beginning of the game, a main interface would be shown on the screen (fig.9) for user to choose different modes of the game. After the user has chosen a mode, the interface with progress bar would be shown on the screen (fig.10) to load the map. After the user completes the game, whether fail the game or successfully conquered one map, the status interface would be shown on the screen (fig.11). When the user touch the status interface, the main interface would be shown again. </p>
+<img class="img-rounded" src="pics/Main_interface.JPG" alt="Generic placeholder image" width="240" height="150"> <img class="img-rounded" src="pics/progress_bar.JPG" alt="Generic placeholder image" width="240" height="150"> <img class="img-rounded" src="pics/Game_over.JPG" alt="Generic placeholder image" width="240" height="150">
+<p class="text-center"> Fig.9 main interface &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Fig.10 loading bar &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Fig.11 status interface </p>
+<h3 class="text-left">5. Music </h3>
+
+<p  style="text-align: left;padding: 0px 30px;font-size: 120%">We added sounds to complete the game, add hearing enjoyment, and increase user experience. When the user is selecting the game modes, a relaxing music is playing. When the user is playing the game, an exciting music is playing. When the user successfully conquers the map, an exciting successful sound plays. When the user loses the game, a disappointing sound plays. </p>
+&nbsp;
+</p>
+</div>
+<hr id='con'>
+
+      <div class="container" style="text-align:center;">
+        <h2 class="text-center">&nbsp;</h2>
+        <h2 class="text-center">Conclusion</h2>
+        <p style="text-align: left;padding: 0px 30px;font-size: 120%">In this project, we have successfully create a game using Raspberry Pi. We use an absolute orientation sensor to develop the game and turn the sensor data into real time orientation, so that user could control the game by body motion, a new way to interact with computer, instead of with traditional keyboard and mouse. In this design, we use pygame for game development, and use piTFT as display interface of the game. During the design, we have changed our initial plan from developing 3D map into 2D in order to avoid bad gaming experience. When the plane rotation angle is too large, the objects on the plane will be blocked by the plane itself, thus affecting the user’s experience. We had designed and include all function that we intended for this 2D game and add some new functions during the development of the game. We add music and interface to improve user experince. Our project is finally completed successfully. <br>
+        </p>
+        
+      
+      </div>
+      <hr id='fut'>
+      <div class="container">
+        <h2 class="text-center">&nbsp;</h2>
+        <h2 class="text-center">Future Work</h2>
+        <p style="text-align: left;padding: 0px 30px;font-size: 120%"> Although we are pleased with our final achivement, improvements of our project are definitely exist. If we had more time on this project, we would focus on turing our 2D images into 3D, implement 3D plane drawing algorithm into map drawing, and we also need to figure out a way to solve the problem of too-much rotation angle leading to invisible of the ball. We would turn from randomly choosing maps to randomly generating maps. A big challenge of randomly generating maps would be to develope an algorithm to ensure the road that could always start and end from the same point and the road could extend continuously. Also, we could expanding the function of our game by adding a ranking list to increase the competitiveness of the game, and we could add some randomly appearing obstacles along the map.</p>
+        &nbsp;</div>
+
+    
+
+    <div class="row" style="text-align:center;">
+          <h2>Work Distribution</h2>
+          <div style="text-align:center;">
+              <img class="img-thumbnail" src="pics/Two.JPG" alt="Generic placeholder image" style="width:40%;">
+              <h4>Project group picture</h4>
+          </div>
+          <div class="col-md-6" style="font-size:16px">
+<h3>Yunting Li</h3>
+            <p class="lead">yl2989@cornell.edu</p>
+            <p>Software design</p>
+            <p>Map and ball drawing </p>
+            <p>Modes and time design</p>
+            <p>Interface design</p>
+            <p> Music display.</p>
+            <p></div>
+          <div class="col-md-6" style="font-size:16px">
+<h3>Qinya Zeng</h3>
+            <p class="lead">qz273@cornell.edu</p>
+            <p>Sensor detection</p>
+            <p>Software design </p>
+            <p>Map and ball drawing</p>
+            <p>Modes and time design</p>
+            <p>Interface design</p>
+            <p></div>
+      </div>
+
+    
+      <div style="font-size:18px">
+          <h2>Parts List</h2>
+          <ul>
+            <li>A Raspberry pi (provided in lab)</li>
+            <li>A piTFT screen (provided in lab)</li>
+            
+            <li>A BNO055 absolute orientation sensor ($34.95)</li>
+            <li>A speaker (provided in lab)</li>
+            <li>Breakout Cable (provided in lab)</li>
+            <li>Breadboard and wires (provided in lab)</li>
+          </ul>
+          <h3>Total: $34.95</h3>
+      </div>
+      
+        <div class="container" style="text-align:center;">
+          <h2 class="text-center">Acknowledgement</h2>
+          <p style="text-align: left;padding: 0px 30px;font-size: 120%">We would like to thank Professor Joe Skovira and TAs, who gave us good advice when we encountered difficulties, and are always available to help us, provide guidance and support throughout the semester<br>
+          </p>
+        </div>
+      
+      <div style="font-size:18px">
+          <h2>References</h2>
+          <a href="https://learn.adafruit.com/adafruit-bno055-absolute-orientation-sensor">BNO055 sensor tutorial </a><br>
+          <a href="http://www.petercollingridge.co.uk/tutorials/3d/pygame">3D graphic with pygame </a><br>
+        <a href="https://www.raspberrypi.org/documentation/usage/gpio/">R-Pi GPIO Document</a><br>
+      </div>
+
+    <hr id="code">
+
+      <div style="font-size:18px">
+              <h2>Code Appendix</h2>
+              <a href="https://github.com/yl2989/ECE5725-Final-Project.git"> See our GitHub repo </a><br>
+	</div>
+
+    </div><!-- /.container -->
+
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+  </body>
+</html>
